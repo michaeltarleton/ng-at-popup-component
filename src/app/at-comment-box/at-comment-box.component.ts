@@ -1,18 +1,27 @@
-import { Component, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, ViewChild, ViewContainerRef, viewChild } from '@angular/core';
 import { AtUsernameComponent } from '../at-username/at-username.component';
+import { AtDropdownComponent } from '../at-dropdown/at-dropdown.component';
 
 @Component({
   selector: 'app-at-comment-box',
   standalone: true,
-  imports: [AtUsernameComponent],
+  imports: [AtUsernameComponent,AtDropdownComponent],
   templateUrl: './at-comment-box.component.html',
   styleUrl: './at-comment-box.component.scss'
 })
 export class AtCommentBoxComponent {
-  public content: string = ''
+  @ViewChild('comment', { read: ViewContainerRef }) comment: ViewContainerRef | undefined
+  componentRefs: ComponentRef<any>[] = []
+
+  @ViewChild(AtDropdownComponent, {
+    static: false
+  }) dropdownComponent: AtDropdownComponent | undefined
+
+  public searchString: string = ''
   type($event: any) {
-    this.content += $event.key
+    this.searchString += $event.key
     this.moveCursorToEnd($event.target)
+    this.dropdownComponent
   }
   isFocus: boolean = false
   onBlur() {
@@ -22,8 +31,6 @@ export class AtCommentBoxComponent {
     this.isFocus = true
     this.moveCursorToEnd($event.target)
   }
-  @ViewChild('comment', { read: ViewContainerRef }) comment: ViewContainerRef | undefined
-  componentRefs: ComponentRef<any>[] = []
 
   remove($event: Event) {
     console.log($event, $event.target)
