@@ -1,1 +1,11 @@
-<p>at-comment-box works!</p>
+<div #comment
+    (keydown.shift.@)="search($event)"
+    (keydown.backspace)="remove($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur()"
+    (click)="onFocus($event)"
+    class="comment"
+    tabindex="0"
+    (keydown)="type($event)"
+    contenteditable="true"
+></div>
