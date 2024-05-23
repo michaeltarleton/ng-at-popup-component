@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AtCommentBoxComponent } from './at-comment-box/at-comment-box.component';
+import { MentionInputComponent } from './mention-input/mention-input.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AtCommentBoxComponent],
+  imports: [RouterOutlet, MentionInputComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

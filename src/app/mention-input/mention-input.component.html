@@ -1,0 +1,15 @@
+<div class="mention-input-container">
+  <div #messageBox
+    (input)="filterUsers($event)"
+    (keydown)="changeSelectedUser($event)"
+    (keydown.enter)="onEnter($event)"
+    placeholder="Type @ to tag a teammate"
+    contenteditable="true"
+    tabindex="0"
+  ></div>
+  <ul *ngIf="showDropdown" class="dropdown">
+    <li *ngFor="let user of filteredUsers; let i = index" [class.selected]="i === selectedIndex" (click)="selectUser(user, messageBox)">
+      {{ user.name }}
+    </li>
+  </ul>
+</div>
